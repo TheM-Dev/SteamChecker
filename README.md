@@ -3,4 +3,4 @@
 
 ### Commands showcase:
 
-###### ![/list add STEAMID](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+###### ![/list add STEAMID](https://github.com/TheM-Dev/SteamChecker/blob/main/images/list_add.png?raw=true)
