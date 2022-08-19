@@ -1,0 +1,33 @@
+{
+  "name": "steamchecker",
+  "version": "1.0.1",
+  "description": "Create yourself a Discord bot notifying you whenever user you added receives steam ban with couple simple steps.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheM-Dev/SteamChecker.git"
+  },
+  "keywords": [
+    "steam",
+    "discord",
+    "checker",
+    "notify",
+    "notifier",
+    "ban"
+  ],
+  "author": "The M.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheM-Dev/SteamChecker/issues"
+  },
+  "homepage": "https://github.com/TheM-Dev/SteamChecker#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dayjs": "^1.11.5",
+    "discord.js": "^14.2.0",
+    "dotenv": "^16.0.1"
+  }
+}
