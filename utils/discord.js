@@ -37,6 +37,11 @@ module.exports = function(playerList){
                             required: true
                         }
                     ]
+                },
+                {
+                    name: "display",
+                    type: 1,
+                    description: "Display the list"
                 }
             ]
         }).then((commandInfo) => {
@@ -55,7 +60,7 @@ module.exports = function(playerList){
                 const userLevel = await steamApi.getUserLevel(steamID);
                 const userGames = await steamApi.getUserGames(steamID);
                 const { gameCount } = userGames;
-                playerList.push({ nickname, profileUrl, avatarUrl, lastLogOff, accountCreated, country });
+                playerList[steamID] = { nickname, profileUrl, avatarUrl, lastLogOff, accountCreated, country };
                 const embed = new EmbedBuilder()
                     .setColor('DARK_VIVID_PINK')
                     .setTitle('User added to watchlist!')
@@ -67,7 +72,53 @@ module.exports = function(playerList){
                     embeds: [embed]
                 })
             } else if(interaction.options.getSubcommand() === 'remove'){
-                console.log(steamID)
+                try {
+                    delete playerList[steamID];
+                    const embed = new EmbedBuilder()
+                        .setColor('DARK_VIVID_PINK')
+                        .setTitle('Successfully removed player!')
+                        .setTimestamp()
+                        .setFooter({ text: 'SteamChecker', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+                    interaction.reply({
+                        embeds: [embed]
+                    })
+                } catch(err){
+                    const embed = new EmbedBuilder()
+                        .setColor('DARK_VIVID_PINK')
+                        .setTitle('Error on removing!')
+                        .setDescription(`Reason: Player doesn't exist`)
+                        .setTimestamp()
+                        .setFooter({ text: 'SteamChecker', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+                    interaction.reply({
+                        embeds: [embed]
+                    })
+                }
+            } else if(interaction.options.getSubcommand() === 'display'){
+                try {
+                    let desc = ``;
+                    const embed = new EmbedBuilder()
+                        .setColor('DARK_VIVID_PINK')
+                        .setTitle('Our current watchlist')
+                        .setTimestamp()
+                        .setFooter({ text: 'SteamChecker', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+                    for(player in playerList){
+                        desc += `> **${playerList[player].nickname} (${player})**\n`
+                    }
+                    embed.setDescription(desc)
+                    interaction.reply({
+                        embeds: [embed]
+                    })
+                } catch(err){
+                    const embed = new EmbedBuilder()
+                        .setColor('DARK_VIVID_PINK')
+                        .setTitle('Our current watchlist')
+                        .setTimestamp()
+                        .setFooter({ text: 'SteamChecker', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+                    embed.setDescription(`Empty!`)
+                    interaction.reply({
+                        embeds: [embed]
+                    })
+                }
             }
         }
     });

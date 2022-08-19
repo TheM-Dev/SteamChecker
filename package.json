@@ -1,6 +1,6 @@
 {
   "name": "steamchecker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create yourself a Discord bot notifying you whenever user you added receives steam ban with couple simple steps.",
   "main": "app.js",
   "scripts": {
